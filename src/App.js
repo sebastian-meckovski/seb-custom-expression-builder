@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import 'devextreme/dist/css/dx.light.css';
 import './App.css';
+import Group from './components/group';
+
+let builderStructure = [
+  {
+    id: 123,
+    children: []
+  },
+  {
+    id:345,
+    children: [
+      {
+        id: 4123,
+        children: []
+      },
+      {
+        id:340235,
+        children: []
+      }
+    ]
+  }
+]
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      {builderStructure.map(x => {
+        return(
+          <Group key={x.id} children={x.children} />
+        )
+      })}
+        
     </div>
   );
 }
