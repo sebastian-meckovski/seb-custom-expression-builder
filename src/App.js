@@ -1,35 +1,21 @@
 import 'devextreme/dist/css/dx.light.css';
+import { useState } from 'react';
 import './App.css';
 import Group from './components/group';
+import builderStructureData from './components/builderStructureData';
 
-let builderStructure = [
-  {
-    id: 123,
-    children: []
-  },
-  {
-    id:345,
-    children: [
-      {
-        id: 4123,
-        children: []
-      },
-      {
-        id:340235,
-        children: []
-      }
-    ]
-  }
-]
 
 
 function App() {
+
+  const [builderStructure, setBuilderStructure] = useState(builderStructureData)
+
   return (
     <div className="App">
 
       {builderStructure.map(x => {
         return(
-          <Group key={x.id} children={x.children} />
+          <Group key={x.id} children={x.children} value={x.value} />
         )
       })}
         

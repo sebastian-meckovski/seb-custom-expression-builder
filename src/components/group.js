@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import { Button } from 'devextreme-react';
-import handleAddGroup from "./handleAddGroup";
 
 export default function Group(props){
-    const [builderStructure, setBuilderStructure] = useState([]);
-    
-    
-    function handleClick(){
-        handleAddGroup(setBuilderStructure)
-    }
     
     let childrenArray = []
     if (props.children){
@@ -17,12 +10,14 @@ export default function Group(props){
 
     return(
         <div className='group' draggable>
-            <Button text='Add Rule' />
-            <Button text='Add Group' onClick={handleClick}/>
+            <p>this is value:  </p>
+            <input value={props.value} readOnly={true}></input>
+            <button>Add Group</button>
          
             {childrenArray.map(x => 
-                {return(
-                    <Group/>
+                {   
+                    return(
+                    <Group key={x.id} children={x.children} value={x.value} />
                 )}    
             )}
 
