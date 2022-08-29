@@ -1,39 +1,47 @@
 import React, { useContext, useEffect, useState } from "react";
-import BuilderContext from '../App'
 
-export default function Group(props){
-    const [item, setItem] = useState(props.item)
-    const builderStructure = useContext(BuilderContext);
-    
+export default function Group({ item, updateItem }) {
 
-    
-    let childrenArray = []
-    if (item.children){
-        item.children.map(x => childrenArray.push(x))
-    }
-    
-    function handleClick(){
-        item.value = props.item.value = 42342349999;
-        setItem({...item})
-    }
+  function handleClick() {
+    updateItem({ ...item, value: 42342349999 });
+  }
 
-    console.log(builderStructure)
+  function handleAddClick() {
+    let newItem = {
+      id: Date.now(),
+      value: 11111111,
+      children: []
+    };
 
-    return(
-        <div className='group' draggable>
-            <p>this is value:  </p>
-            <input value={item.value} readOnly={true}></input>
-            <button onClick={handleClick}>Update value</button>
-         
-            {childrenArray.map(x => 
-                {   
-                    return(
-                        <Group key={x.id} item={x} />
-                     )}    
-            )}
+    updateItem({
+      ...item,
+      children: [...item.children, newItem]
+    });
+  }
 
-        </div>
+  function updateNestedItem(index) {
+    return (updatedItem) => {
+      updateItem({
+        ...item,
+        children: [
+          ...item.children.slice(0, index),
+          updatedItem,
+          ...item.children.slice(index + 1)
+        ]
+      });
+    };
+  }
 
-        
-    )
+  return (
+    <div className="group" draggable>
+      <p>this is value: </p>
+      <input value={item.value} readOnly={true}></input>
+      <button onClick={handleClick}>Update value</button>
+      <button onClick={handleAddClick}>Add Group</button>
+
+      {item.children.map((x, i) => {
+        return <Group key={x.id} item={x} updateItem={updateNestedItem(i)} />;
+      })}
+    </div>
+  );
 }
