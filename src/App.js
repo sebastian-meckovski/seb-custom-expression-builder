@@ -10,8 +10,6 @@ function App() {
     builderStructureData
   );
 
-  useEffect(() => console.log(builderStructure), [builderStructure]);
-
   function updateItem(index) {
     return (updatedItem) => {
       setBuilderStructure([
@@ -22,18 +20,13 @@ function App() {
     };
   }
 
-  
-
   return (
     <div className="App">
       {builderStructure.map((x, i) => {
         return (
-          <BuilderContext.Provider key={x.id} value={builderStructure}>
-            <Group updateItem={updateItem(i)} item={x} />
-          </BuilderContext.Provider>
+            <Group updateItem={updateItem(i)} item={x} key={x}/>
         );
       })}
-      <button onClick={() => console.log(builderStructure)}>Click Me</button>
       <pre>{JSON.stringify(builderStructure, null, 2)}</pre>
     </div>
   );

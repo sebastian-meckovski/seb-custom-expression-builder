@@ -1,32 +1,50 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
+import CreateGuid from "./createGuid";
+import Rule from './rule'
 
 export default function Group({ item, updateItem }) {
 
-  function handleClick() {
-    updateItem({ ...item, value: 42342349999 });
-  }
 
-  function handleAddClick() {
+  function handleAddGroupClick() {
     let newItem = {
-      id: Date.now(),
-      value: 11111111,
-      children: []
+      type: 'group',
+      values: []
     };
 
     updateItem({
       ...item,
-      children: [...item.children, newItem]
+      values: [ ...item.values, newItem]
     });
+  }
+
+  function addNewRule(){
+
+    let ruleValue = {
+      columnId: CreateGuid(),
+      operator: 1,
+      name: "External Reference (Patient)",
+      value: "A String",
+      description: "A String"
+    }
+
+    let newRule ={
+      type: 'StringValue',
+      value: ruleValue,
+    }
+    updateItem({
+      ...item,
+      values: [newRule, ...item.values]
+    })
   }
 
   function updateNestedItem(index) {
     return (updatedItem) => {
       updateItem({
         ...item,
-        children: [
-          ...item.children.slice(0, index),
+        values: [
+          ...item.values.slice(0, index),
           updatedItem,
-          ...item.children.slice(index + 1)
+          ...item.values.slice(index + 1)
         ]
       });
     };
@@ -34,14 +52,13 @@ export default function Group({ item, updateItem }) {
 
   return (
     <div className="group" draggable>
-      <p>this is value: </p>
-      <input value={item.value} readOnly={true}></input>
-      <button onClick={handleClick}>Update value</button>
-      <button onClick={handleAddClick}>Add Group</button>
 
-      {item.children.map((x, i) => {
-        return <Group key={x.id} item={x} updateItem={updateNestedItem(i)} />;
-      })}
+      <button onClick={handleAddGroupClick}>Add Group</button>
+      <button onClick={addNewRule}>Add Rule</button>
+
+      {item.values ? item.values.map((x, i) => {
+        return x.type === 'group' ? <Group key={CreateGuid()} item={x} updateItem={updateNestedItem(i)} /> : <Rule key={x.value.columnId}/>
+      }) : null}
     </div>
   );
 }

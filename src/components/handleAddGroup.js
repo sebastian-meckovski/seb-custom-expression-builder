@@ -6,6 +6,6 @@ export default function handleAddGroup(setBuilderStructure){
     setBuilderStructure(prevState => {
         return [...prevState, {
             id: guid,
-            children: {}
+            values: {}
         }]})
   }

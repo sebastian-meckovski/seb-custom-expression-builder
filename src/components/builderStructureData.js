@@ -1,8 +1,10 @@
+import CreateGuid from "./createGuid";
+
 var builderStructureData = [
     {
-      id: 123,
-      value: 3,
-      children: []
+      isEmpty: false,
+      operator: 0, 
+      values: []
     }
   ]
   
