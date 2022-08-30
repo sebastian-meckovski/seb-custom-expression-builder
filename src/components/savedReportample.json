@@ -1,0 +1,280 @@
+{
+  "id": "386c3b1a-106e-4567-96e4-18384d13d906",
+  "tenantId": "008168bc-2c24-4db6-a291-8998b030c9b2",
+  "type": "SavedReport",
+  "isLandscape": false,
+  "templateId": "4d79a7c1-37f5-49f2-a726-248a8379bb90",
+  "savedReportId": 32556,
+  "baseQueryId": "20699931-8550-440f-b62f-a213a3a0261f",
+  "title": "CJH Filter Test",
+  "description": "",
+  "criteria": {
+    "parameters": [],
+    "columns": [
+      {
+        "columnId": "4b1be425-e1b0-4e90-b57c-1e2a7792f402",
+        "heading": "Days (First Referred To Admission)",
+        "orginalHeading": "Days (First Referred To Admission)",
+        "width": 2,
+        "secondaryWidth": 0,
+        "outputType": 0,
+        "outputFormat": 1,
+        "isSeparateColumns": false,
+        "hasTotals": true,
+        "sortOrder": 0,
+        "filteredColumnIndex": 0,
+        "columnFilters": {
+          "isEmpty": true,
+          "operator": 0,
+          "values": []
+        },
+        "extension": null
+      },
+      {
+        "columnId": "c4e3ff6d-c91c-47a5-a50c-6f8a6aed627a",
+        "heading": "Episodes of Care",
+        "orginalHeading": "Episodes of Care",
+        "width": 2,
+        "secondaryWidth": 0,
+        "outputType": 0,
+        "outputFormat": 1,
+        "isSeparateColumns": false,
+        "hasTotals": true,
+        "sortOrder": 0,
+        "filteredColumnIndex": 0,
+        "columnFilters": {
+          "isEmpty": true,
+          "operator": 0,
+          "values": []
+        },
+        "extension": null
+      },
+      {
+        "columnId": "1002dee5-e900-4857-845b-2ccf4c94d836",
+        "heading": "Length of Stay (Days)",
+        "orginalHeading": "Length of Stay (Days)",
+        "width": 2,
+        "secondaryWidth": 0,
+        "outputType": 0,
+        "outputFormat": 1,
+        "isSeparateColumns": false,
+        "hasTotals": true,
+        "sortOrder": 0,
+        "filteredColumnIndex": 0,
+        "columnFilters": {
+          "isEmpty": true,
+          "operator": 0,
+          "values": []
+        },
+        "extension": null
+      }
+    ],
+    "groupings": [
+      {
+        "columnId": "ed4a1357-a6b7-44fa-aef4-ec150c64488f",
+        "heading": "Clinician (Lead)",
+        "originalHeading": "",
+        "width": 2,
+        "secondaryWidth": 0,
+        "outputType": 3,
+        "outputFormat": 0,
+        "isSeparateColumns": true,
+        "sortOrder": 0
+      }
+    ],
+    "filters": {
+      "isEmpty": false,
+      "operator": 0,
+      "values": [
+        {
+          "type": "BoolValue",
+          "value": {
+            "columnId": "6e82f4fa-7646-4d11-94f4-2d41c523ae3a",
+            "operator": 1,
+            "name": "Active Clock (Only)",
+            "value": true,
+            "description": "True"
+          }
+        },
+        {
+          "type": "ListInt",
+          "value": {
+            "columnId": "48df737d-8bcf-4e63-91b6-f0f02e4578e9",
+            "name": "Admission Method",
+            "isNot": false,
+            "values": [
+              {
+                "value": 4,
+                "description": "Accident and emergency or dental casualty department of the Health Care Provider"
+              },
+              {
+                "value": 15,
+                "description": "Admitted post-partum"
+              },
+              {
+                "value": 6,
+                "description": "Bed bureau"
+              }
+            ]
+          }
+        },
+        {
+          "type": "IntValue",
+          "value": {
+            "columnId": "05b3b82e-e77a-4900-8eba-d20adb261a0a",
+            "operator": 1,
+            "name": "Admission Source",
+            "value": null,
+            "description": "\u003CBlank\u003E"
+          }
+        },
+        {
+          "type": "IntValue",
+          "value": {
+            "columnId": "5c4e87cc-df3e-4759-a853-faa40aa4bfc8",
+            "operator": 1,
+            "name": "Age (At Date of Admission)",
+            "value": 23,
+            "description": "23"
+          }
+        },
+        {
+          "type": "DateTimeValue",
+          "value": {
+            "columnId": "afa5b690-58d4-4411-996f-2a21a6ab852c",
+            "operator": 1,
+            "name": "Authorisation Until Date",
+            "value": null,
+            "description": null
+          }
+        },
+        {
+          "type": "DateTimeBetweenValue",
+          "value": {
+            "columnId": "05b1087f-c51a-4dac-9e4d-afaf4c602974",
+            "beginValue": "2021-10-25T00:00:00+01:00",
+            "endValue": "2021-10-25T00:00:00+01:00",
+            "isNot": false,
+            "name": "Date of Birth"
+          }
+        },
+        {
+          "type": "TodayRelativeValue",
+          "value": {
+            "columnId": "7b339fdb-92cb-44b0-9909-0fda4a753d6d",
+            "name": "Date of Breach",
+            "offsetUnit": 0,
+            "offset": -2,
+            "isNot": false
+          }
+        },
+        {
+          "type": "DateRangeRelativeValue",
+          "value": {
+            "columnId": "bc1dc3a1-9b1b-46bd-9e39-0ab58b00b8bc",
+            "isNot": false,
+            "name": "Date of Discharge",
+            "rangeType": 4,
+            "offset": 0
+          }
+        },
+        {
+          "type": "StringValue",
+          "value": {
+            "columnId": "743dd2b9-c38c-465a-972e-693f9f9c5aa8",
+            "operator": 1,
+            "name": "External Reference (Patient)",
+            "value": "A String",
+            "description": "A String"
+          }
+        },
+        {
+          "type": "CustomValue",
+          "value": {
+            "filterExpression": "p.PatientId \u003E 0",
+            "name": ""
+          }
+        },
+        {
+          "type": "StringValue",
+          "value": {
+            "columnId": "608ce241-cf28-4749-aa4e-dc94dd6565fe",
+            "operator": 16,
+            "name": "Notes (Episode of Care)",
+            "value": "A Note",
+            "description": "A Note"
+          }
+        },
+        {
+          "type": "DateTimeBetweenValue",
+          "value": {
+            "columnId": "05b1087f-c51a-4dac-9e4d-afaf4c602974",
+            "beginValue": "2021-11-01T00:00:00",
+            "endValue": "2021-11-30T00:00:00+00:00",
+            "isNot": true,
+            "name": "Date of Birth"
+          }
+        },
+        {
+          "type": "BoolValue",
+          "value": {
+            "columnId": "f0634e51-6cfa-4d0b-9964-f64bac44587e",
+            "operator": 3,
+            "name": "Open Care Records (Only)",
+            "value": true,
+            "description": "True"
+          }
+        },
+        {
+          "type": "IntValue",
+          "value": {
+            "columnId": "ff8c5ee3-3e25-46cf-945d-5701cdc3f72e",
+            "operator": 3,
+            "name": "Age (At Date of Referral)",
+            "value": 50,
+            "description": "50"
+          }
+        },
+        {
+          "type": "Group",
+          "value": {
+            "isEmpty": false,
+            "operator": 1,
+            "values": [
+              {
+                "type": "TimeValue",
+                "value": {
+                  "columnId": "c62501fe-2960-4cb8-8694-354fea6d7883",
+                  "operator": 5,
+                  "name": "Time of Admission",
+                  "value": "15:00",
+                  "description": "15:00"
+                }
+              },
+              {
+                "type": "TimeValue",
+                "value": {
+                  "columnId": "c62501fe-2960-4cb8-8694-354fea6d7883",
+                  "operator": 9,
+                  "name": "Time of Admission",
+                  "value": "18:00",
+                  "description": "18:00"
+                }
+              },
+              {
+                "type": "TodayRelativeValue",
+                "value": {
+                  "columnId": "548e7233-308d-4648-a138-30b821703675",
+                  "name": "Date of First Procedure",
+                  "offsetUnit": 2,
+                  "offset": -1,
+                  "isNot": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
