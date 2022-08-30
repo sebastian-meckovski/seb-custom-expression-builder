@@ -33,7 +33,7 @@ export default function Group({ item, updateItem }) {
     }
     updateItem({
       ...item,
-      values: [newRule, ...item.values]
+      values: [...item.values, newRule]
     })
   }
 
