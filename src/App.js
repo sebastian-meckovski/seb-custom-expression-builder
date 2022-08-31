@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import "./App.css";
 import Group from "./components/group";
 import builderStructureData from "./components/builderStructureData";
@@ -19,6 +19,11 @@ function App() {
       ]);
     };
   }
+
+  // useEffect(
+  //   ()=>console.log(builderStructure)
+  //   ,[builderStructure]
+  // )
 
   return (
     <div className="App">

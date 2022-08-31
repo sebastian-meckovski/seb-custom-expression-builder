@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CreateGuid from "./createGuid";
 import Rule from './rule'
 
@@ -8,13 +8,27 @@ export default function Group({ item, updateItem }) {
   function handleAddGroupClick() {
     let newItem = {
       type: 'group',
-      values: []
+      value: {
+        operator: 1,
+        values: []
+      }
     };
-
-    updateItem({
-      ...item,
-      values: [ ...item.values, newItem]
-    });
+    
+    if(item.value){
+      updateItem({
+        ...item,
+        value:{
+          ...item.value,
+          values: [...item.value.values, newItem]
+        }
+      })
+    } 
+    else {
+      updateItem({
+        ...item,
+        values: [ ...item.values, newItem]
+      });
+    }
   }
 
   function addNewRule(){
@@ -31,23 +45,50 @@ export default function Group({ item, updateItem }) {
       type: 'StringValue',
       value: ruleValue,
     }
-    updateItem({
-      ...item,
-      values: [...item.values, newRule]
-    })
+
+    if(item.values){
+      updateItem({
+        ...item,
+        values: [...item.values, newRule]
+      })
+    } else {
+      updateItem({
+        ...item,
+        value:{
+          ...item.value,
+          values: [...item.value.values, newRule]
+        }
+      })
+    }
   }
 
   function updateNestedItem(index) {
     return (updatedItem) => {
-      updateItem({
-        ...item,
-        values: [
-          ...item.values.slice(0, index),
-          updatedItem,
-          ...item.values.slice(index + 1)
-        ]
-      });
-    };
+      
+      if(item.values){
+        updateItem({
+          ...item,
+          values: [
+            ...item.values.slice(0, index),
+            updatedItem,
+            ...item.values.slice(index + 1)
+          ]
+        });
+      } else {
+        
+        updateItem({
+          ...item,
+          value:{
+            ...item.value,
+            values: [
+              ...item.value.values.slice(0, index),
+              updatedItem,
+              ...item.value.values.slice(index + 1)
+            ]
+          },
+        });
+      }
+      }
   }
 
   return (
@@ -57,8 +98,14 @@ export default function Group({ item, updateItem }) {
       <button onClick={addNewRule}>Add Rule</button>
 
       {item.values ? item.values.map((x, i) => {
-        return x.type === 'group' ? <Group key={CreateGuid()} item={x} updateItem={updateNestedItem(i)} /> : <Rule key={x.value.columnId}/>
-      }) : null}
+        return x.type === 'group' ? <Group key={CreateGuid()} item={x} updateItem={updateNestedItem(i)} /> 
+        : <Rule key={x.value.columnId}/>
+      }) : 
+      item.value.values.map((x, i) => {
+        return x.type === 'group' ? <Group key={CreateGuid()} item={x} updateItem={updateNestedItem(i)} /> 
+        : <Rule key={x.value.columnId}/>
+      })
+      }
     </div>
   );
 }
