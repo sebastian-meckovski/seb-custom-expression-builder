@@ -10,21 +10,14 @@ function App() {
     builderStructureData
   );
 
-  function updateItem(index) {
+  function updateItem() {
     return (updatedItem) => {
+      console.log(updatedItem.values)
       setBuilderStructure([
-        ...builderStructure.slice(0, index),
-        updatedItem,
-        ...builderStructure.slice(index + 1)
+        updatedItem
       ]);
     };
   }
-
-  // useEffect(
-  //   ()=>console.log(builderStructure)
-  //   ,[builderStructure]
-  // )
-
   return (
     <div className="App">
       {builderStructure.map((x, i) => {
@@ -32,7 +25,7 @@ function App() {
             <Group updateItem={updateItem(i)} item={x} key={x}/>
         );
       })}
-      <pre>{JSON.stringify(builderStructure, null, 2)}</pre>
+      <pre>{JSON.stringify(builderStructure[0], null, 2)}</pre>
     </div>
   );
 }
