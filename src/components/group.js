@@ -97,7 +97,6 @@ export default function Group({ item, updateItem }) {
         }
       else {
         if (updatedItem === null){
-          console.log("it's emptyy noo")
           updateItem({
             ...item,
             value:{
@@ -125,9 +124,44 @@ export default function Group({ item, updateItem }) {
       }
   }
 
+  function changeOperator(){
+    if (item.value){
+      if (item.value.operator === 1){
+        updateItem({
+          ...item,
+          value: {
+            ...item.value,
+            operator: 0
+          }
+        })
+      } else if (item.value.operator === 0) {
+        updateItem({
+          ...item,
+          value: {
+            ...item.value,
+            operator: 1
+          }
+        })
+      }
+    } 
+    else if(item){
+      if (item.operator === 1){
+        updateItem({
+          ...item,
+          operator: 0
+        })
+      } else if (item.operator === 0) {
+        updateItem({
+          ...item,
+          operator: 1
+        })
+      }
+    } 
+  }
+
   return (
     <div className="group" draggable>
-
+      <p onClick={changeOperator}>{item.value? item.value.operator === 1 ? "AND" : "OR" : item.operator === 1 ? "AND" : "OR"}</p>
       <button onClick={handleAddGroupClick}>Add Group</button>
       <button onClick={addNewRule}>Add Rule</button>
       <button onClick={handleDelete}> Delete Group </button>

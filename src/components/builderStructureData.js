@@ -1,6 +1,6 @@
 var builderStructureData = [
     {
-      operator: 1, 
+      operator: 0, 
       values: []
     }
   ]
