@@ -64,6 +64,7 @@ export default function Group({ item, updateItem }) {
   }
 
   function handleDelete(){
+    console.log(item.values)
     if(item.values){
       return
     } else {
@@ -134,13 +135,13 @@ export default function Group({ item, updateItem }) {
       {item.values ? item.values.map((x, i) => {
         if (x){
         return x.type === 'group' ? <Group key={CreateGuid()} item={x} updateItem={updateNestedItem(i)} /> 
-          : <Rule key={CreateGuid()}/>
+          : <Rule key={CreateGuid()} handleDelete={handleDelete} item={x} updateItem={updateNestedItem(i)}/>
         }
       }) : 
       item.value.values.map((x, i) => {
         if (x){
         return x.type === 'group' ? <Group key={CreateGuid()} item={x} updateItem={updateNestedItem(i)} /> 
-          : <Rule key={CreateGuid()}/>  
+          : <Rule key={CreateGuid()} handleDelete={handleDelete} item={x} updateItem={updateNestedItem(i)}/>  
         }
       })
       }
