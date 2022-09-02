@@ -31,25 +31,20 @@ export default function Group({ item, updateItem }) {
     }
   }
 
-  function addNewRule(){
 
-    let ruleValue = {
-      columnId: CreateGuid(),
-      operator: 1,
-      name: "External Reference (Patient)",
-      value: "A String",
-      description: "A String"
-    }
 
-    let newRule ={
-      type: 'StringValue',
-      value: ruleValue,
-    }
+  let newRule ={
+    type: 'StringValue',
+    value:  [],
+  }
+
+  function addNewRule(x){
+
 
     if(item.values){
       updateItem({
         ...item,
-        values: [...item.values, newRule]
+        values: [...item.values, x]
       })
     } else {
 
@@ -163,19 +158,19 @@ export default function Group({ item, updateItem }) {
     <div className="group" draggable>
       <p onClick={changeOperator}>{item.value? item.value.operator === 1 ? "AND" : "OR" : item.operator === 1 ? "AND" : "OR"}</p>
       <button onClick={handleAddGroupClick}>Add Group</button>
-      <button onClick={addNewRule}>Add Rule</button>
+      <button onClick={() => addNewRule(newRule)}>Add Rule</button>
       <button onClick={handleDelete}> Delete Group </button>
 
       {item.values ? item.values.map((x, i) => {
         if (x){
         return x.type === 'group' ? <Group key={CreateGuid()} item={x} updateItem={updateNestedItem(i)} /> 
-          : <Rule key={CreateGuid()} handleDelete={handleDelete} item={x} updateItem={updateNestedItem(i)}/>
+          : <Rule key={CreateGuid()} handleDelete={handleDelete} item={x} updateItem={updateNestedItem(i)} addNewRule={addNewRule}/>
         }
       }) : 
       item.value.values.map((x, i) => {
         if (x){
         return x.type === 'group' ? <Group key={CreateGuid()} item={x} updateItem={updateNestedItem(i)} /> 
-          : <Rule key={CreateGuid()} handleDelete={handleDelete} item={x} updateItem={updateNestedItem(i)}/>  
+          : <Rule key={CreateGuid()} handleDelete={handleDelete} item={x} updateItem={updateNestedItem(i)} addNewRule={addNewRule}/>  
         }
       })
       }

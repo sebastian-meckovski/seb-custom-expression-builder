@@ -8,52 +8,30 @@ export default function Rule(props){
     }
 
     function handleChange(e){
-        setInputValue(e.target.value)
-
-        let ruleValue = {
-            columnId: CreateGuid(),
-            operator: 1,
-            name: inputValue,
-            value: "A String",
-            description: "A String"
-        }
-
-        let newRule ={
-            type: 'StringValue',
-            value: ruleValue,
-        }
-        console.log(newRule)
-
-    }
-
-    useEffect( ()=> {
-        let ruleValue = {
-            columnId: CreateGuid(),
-            operator: 1,
-            name: inputValue,
-            value: "A String",
-            description: "A String"
-        }
-
-        let newRule ={
-            type: 'StringValue',
-            value: ruleValue,
-          }
         
-        if(props.item.values){
-        props.updateItem({
-            ...props.item,
-            values: [...props.item.values, newRule]
-            })
-        console.log(newRule)
-        }
+        setInputValue(
+            {
+                type: 'StringValue',
+                value: {
+                    columnId: CreateGuid(),
+                    operator: 1,
+                    name: e.target.value,
+                    value: "A String",
+                    description: "A String"
+                }
+            }
+        )
     }
-        ,[inputValue])
+    
+    function handleUpdate(){
+        props.updateItem(inputValue)
+    }
 
     return(
         <div style={{"display": "flex"}}>
-            <input type={'text'} value={inputValue} onChange={handleChange} />
+            <input type={'text'} onChange={handleChange} />
             <p>This is rule</p>
+            <button onClick={handleUpdate}> Update Rule </button>
             <button onClick={handleDelete}> Delete Rule </button>
         </div>
     )
