@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import "./App.css";
 import Group from "./components/group";
 import builderStructureData from "./components/builderStructureData";
+import GPSolution from './components/GPSolution'
 
 export const BuilderContext = createContext();
 
@@ -21,14 +22,15 @@ function App() {
   }
 
   return (
-    <div className="App">
-      {builderStructure.map((x, i) => {
-        return (
-            <Group updateItem={updateItem(i)} item={x} key={x}/>
-        );
-      })}
-      <pre>{JSON.stringify(builderStructure, null, 2)}</pre>
-    </div>
+    // <div className="App">
+    //   {builderStructure.map((x, i) => {
+    //     return (
+    //         <Group updateItem={updateItem(i)} item={x} key={x}/>
+    //     );
+    //   })}
+    //   <pre>{JSON.stringify(builderStructure, null, 2)}</pre>
+    // </div>
+    <GPSolution />
   );
 }
 
