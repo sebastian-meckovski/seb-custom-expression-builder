@@ -3,6 +3,7 @@ import CreateGuid from "./createGuid";
 
 export default function Rule(props){
     const [inputValue, setInputValue] = useState("")
+
     function handleDelete(){
         props.updateItem(null)
     }
@@ -27,12 +28,17 @@ export default function Rule(props){
         props.updateItem(inputValue)
     }
 
+    function CheckRule(){
+        console.log(props.item)
+    }
+
     return(
         <div style={{"display": "flex"}}>
             <input type={'text'} onChange={handleChange} />
             <p>This is rule</p>
             <button onClick={handleUpdate}> Update Rule </button>
             <button onClick={handleDelete}> Delete Rule </button>
+            <button onClick={CheckRule}> Check Rule </button>
         </div>
     )
 }
