@@ -23,6 +23,7 @@ function SebSolution2() {
   }, [mainState]);
 
   const handleChange = (path, value) => {
+    console.log(path)
     setMainState((prevState) => {
       return getNestedUpdate(prevState, [...path], value);
     });
@@ -64,16 +65,23 @@ function SebSolution2() {
     });
   };
 
+  useEffect(
+    () => console.log(mainState.value.values),
+    [mainState]
+  )
   
 
   const AddItem = (state, path, value) => {
     if(value === null){
       console.log('trying to delete')
+      console.log(value)
+
+
+
       return {
         ...state,
         value: {
-          // ...state.value,
-          values: state.value.values.pop()
+          values: mainState.value.values.splice(path, 1)
         }
       }
     }
@@ -129,6 +137,7 @@ function SebSolution2() {
     }));
   };
   const AddRuleToMain = () => {
+    console.log(mainState)
     setMainState((prevState) => ({
       ...prevState,
       value: {
