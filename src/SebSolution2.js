@@ -74,15 +74,10 @@ function SebSolution2() {
   const AddItem = (state, path, value) => {
     if(value === null){
       console.log('trying to delete')
-      console.log(value)
-
-
+      console.log(state.value)
 
       return {
-        ...state,
-        value: {
-          values: mainState.value.values.splice(path, 1)
-        }
+        ...state
       }
     }
 
