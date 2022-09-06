@@ -10,8 +10,7 @@ export const BuilderContext = createContext();
 function App() {
   return (
     <>
-      <SebSolution2 />
-      {/* <SebSolution3/> */}
+      <SebSolution3 />
     </>
   );
 }

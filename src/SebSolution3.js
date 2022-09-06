@@ -3,14 +3,23 @@ import React from "react";
 const data = {
     op: 0,
     value: {
-      values: []
+      values: [
+        {
+          op: 0,
+          value: {
+            values: [
+              { op: 2, value: { values: [{ op: 3, value: { values: [] } }] } }
+            ]
+          }
+        },
+        { op: 3, value: { values: [{ op: 3, value: { values: [] } }] } }
+      ]
     }
   };
   
   const ACTIONS = {
     CHANGE: "change",
     ADD: "add",
-    ADDMAIN: "addmain",
     DELETE: "delete"
   };
   
@@ -51,9 +60,6 @@ const data = {
               )
             }
           };
-        case ACTIONS.ADDMAIN:
-            console.log('returning addMain')
-            return state
         default:
           return state;
       }
@@ -95,12 +101,7 @@ const data = {
             ></RecursiveFn>
           );
         })}
-        <button  onClick={ () => setMainState((prevState)=>{ 
-            console.log('running addMain')
-            return(
-                {...prevState, mainState}
-            )
-         })}>Add</button>
+        <button>Add</button>
         <hr />
         <div>
           <pre>{JSON.stringify(mainState, null, 2)}</pre>
@@ -121,6 +122,7 @@ const data = {
         key={props.path}
       >
         <div>
+          {" "}
           OP -
           <input
             type={"text"}
