@@ -10,18 +10,14 @@ let receivedColumns = IPReports[0].columns;
 function App() {
   const [builderStructure, setBuilderStructure] =
     useState(builderStructureData);
-  const [filterColumns, setFilterColumns] = useState([]);
+  let filterColumns = []
 
-  useEffect(() => {
-    receivedColumns.forEach((x) => {
-      if (x.filterInfo && x.filterInfo.isFilter) {
-        setFilterColumns((prevState) => {
-          return [...prevState, x];
-        });
-      }
-    });
-  }, []);
-
+  receivedColumns.forEach((x) => {
+    if (x.filterInfo && x.filterInfo.isFilter) {
+      filterColumns.push(x)
+    }
+  });
+  
   function updateItem() {
     return (updatedItem) => {
       setBuilderStructure([updatedItem]);
@@ -33,13 +29,6 @@ function App() {
         return (
           <div style={{ border: "1px dotted black" }}>
             <Group updateItem={updateItem(i)} item={x} key={i} filterColumns={filterColumns} />
-            <button
-              onClick={() => {
-                console.log(filterColumns);
-              }}
-            >
-              Click Me
-            </button>
           </div>
         );
       })}

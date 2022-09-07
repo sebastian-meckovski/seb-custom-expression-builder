@@ -32,8 +32,6 @@ export default function Group({ item, updateItem, filterColumns }) {
 
   }
 
-
-
   let newRule ={
     type: 'StringValue',
     value:  [],
