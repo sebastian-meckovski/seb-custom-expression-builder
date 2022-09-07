@@ -13,7 +13,7 @@ function App() {
   let filterColumns = []
 
   receivedColumns.forEach((x) => {
-    if (x.filterInfo && x.filterInfo.isFilter) {
+    if (x.filterInfo && x.filterInfo.isFilter && x.filterInfo.controlType !== null  ) {
       filterColumns.push(x)
     }
   });

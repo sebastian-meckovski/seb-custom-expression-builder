@@ -162,13 +162,13 @@ export default function Group({ item, updateItem, filterColumns }) {
     
       {item.values ? item.values.map((x, i) => {
         if (x){
-        return x.type === 'group' ? <Group key={i} item={x} updateItem={updateNestedItem(i)} /> 
+        return x.type === 'group' ? <Group key={i} item={x} updateItem={updateNestedItem(i)} filterColumns={filterColumns}/> 
           : <Rule key={i} handleDelete={handleDelete} item={x} updateItem={updateNestedItem(i)} addNewRule={addNewRule} filterColumns={filterColumns}/>
         }
       }) : 
       item.value.values.map((x, i) => {
         if (x){
-        return x.type === 'group' ? <Group key={i} item={x} updateItem={updateNestedItem(i)} /> 
+        return x.type === 'group' ? <Group key={i} item={x} updateItem={updateNestedItem(i)} filterColumns={filterColumns} /> 
           : <Rule key={i} handleDelete={handleDelete} item={x} updateItem={updateNestedItem(i)} addNewRule={addNewRule} filterColumns={filterColumns}/>  
         }
       })
