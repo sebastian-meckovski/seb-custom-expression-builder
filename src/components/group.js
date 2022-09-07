@@ -2,7 +2,7 @@ import React from "react";
 import CreateGuid from "./createGuid";
 import Rule from './rule'
 
-export default function Group({ item, updateItem }) {
+export default function Group({ item, updateItem, filterColumns }) {
 
 
   function handleAddGroupClick() {
@@ -23,12 +23,13 @@ export default function Group({ item, updateItem }) {
         }
       })
     } 
-    else {
+    else if (item.values) {
       updateItem({
         ...item,
         values: [ ...item.values, newItem]
       });
     }
+
   }
 
 
@@ -70,7 +71,7 @@ export default function Group({ item, updateItem }) {
   function updateNestedItem(index) {
     return (updatedItem) => {
       if(item.values){
-        if(updatedItem === null){
+        if(!updatedItem){
           console.log("it's emptyy")
           updateItem({
             ...item,
@@ -160,17 +161,17 @@ export default function Group({ item, updateItem }) {
       <button onClick={handleAddGroupClick}>Add Group</button>
       <button onClick={() => addNewRule(newRule)}>Add Rule</button>
       <button onClick={handleDelete}> Delete Group </button>
-
+    
       {item.values ? item.values.map((x, i) => {
         if (x){
-        return x.type === 'group' ? <Group key={CreateGuid()} item={x} updateItem={updateNestedItem(i)} /> 
-          : <Rule key={CreateGuid()} handleDelete={handleDelete} item={x} updateItem={updateNestedItem(i)} addNewRule={addNewRule}/>
+        return x.type === 'group' ? <Group key={i} item={x} updateItem={updateNestedItem(i)} /> 
+          : <Rule key={i} handleDelete={handleDelete} item={x} updateItem={updateNestedItem(i)} addNewRule={addNewRule} filterColumns={filterColumns}/>
         }
       }) : 
       item.value.values.map((x, i) => {
         if (x){
-        return x.type === 'group' ? <Group key={CreateGuid()} item={x} updateItem={updateNestedItem(i)} /> 
-          : <Rule key={CreateGuid()} handleDelete={handleDelete} item={x} updateItem={updateNestedItem(i)} addNewRule={addNewRule}/>  
+        return x.type === 'group' ? <Group key={i} item={x} updateItem={updateNestedItem(i)} /> 
+          : <Rule key={i} handleDelete={handleDelete} item={x} updateItem={updateNestedItem(i)} addNewRule={addNewRule} filterColumns={filterColumns}/>  
         }
       })
       }

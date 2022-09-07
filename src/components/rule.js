@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CreateGuid from "./createGuid";
 
 export default function Rule(props){
     const [inputValue, setInputValue] = useState("")
+
+    console.log(props.filterColumns)
 
     function handleDelete(){
         props.updateItem(null)
