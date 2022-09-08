@@ -33,13 +33,11 @@ export default function Group({ item, updateItem, filterColumns }) {
   }
 
   let newRule ={
-    type: 'StringValue',
+    type: null,
     value:  [],
   }
 
   function addNewRule(x){
-
-
     if(item.values){
       updateItem({
         ...item,
@@ -69,8 +67,10 @@ export default function Group({ item, updateItem, filterColumns }) {
   function updateNestedItem(index) {
     return (updatedItem) => {
       if(item.values){
+
+
         if(!updatedItem){
-          console.log("it's emptyy")
+          debugger
           updateItem({
             ...item,
             values: [
@@ -154,7 +154,7 @@ export default function Group({ item, updateItem, filterColumns }) {
   }
 
   return (
-    <div className="group" draggable>
+    <div className="group">
       <p onClick={changeOperator}>{item.value? item.value.operator === 1 ? "AND" : "OR" : item.operator === 1 ? "AND" : "OR"}</p>
       <button onClick={handleAddGroupClick}>Add Group</button>
       <button onClick={() => addNewRule(newRule)}>Add Rule</button>

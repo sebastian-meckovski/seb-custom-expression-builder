@@ -1,34 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NumberBox, SelectBox, TextBox } from "devextreme-react";
+import returnControlType from "./controlTypes";
 
 export default function FilterType(props) {
   let styles = { display: "flex" };
-
-  console.log(props.thing);
 
   let selectedColumnType = props.selectedColumn
     ? props.selectedColumn.filterInfo.controlType
     : null;
 
-  console.log(props.selectedColumn);
 
   switch (selectedColumnType) {
     case 1:
       return (
         <div style={styles}>
-          <SelectBox items={props.filterOperators} displayExpr={'symbol'} onValueChanged={ (e) => {props.setSelectedOperator(e.value)} } value={props.selectedOperator}/>
+          <SelectBox
+            items={props.filterOperators}
+            displayExpr={"symbol"}
+            placeholder={'Select Operator...'}
+            value={props.selectedOperator}
+            onValueChanged={(e) => {
+              props.setSelectedOperator(e.value)
+                
+              props.setInputValue((prevState) => {
+                return {
+                  ...prevState,
+                  value: {
+                    ...prevState.value,
+                    operator: e.value.id,
+                  },
+                };
+              });
+            }}
+          />
           <NumberBox
             onValueChanged={(e) => {
-
-              props.setInputValue({
-                type: "IntValue",
-                value: {
-                  columnId: props.selectedColumn.columnId,
-                  operator: props.selectedOperator.id,
-                  name: props.selectedColumn.name,
-                  value: e.value,
-                  description: e.value.toString(),
-                }});
+              props.setFilterValue(e.value)
+              props.setInputValue((prevState) => {
+                return {
+                  ...prevState,
+                  value: {
+                    ...prevState.value,
+                    columnId: props.selectedColumn.columnId,
+                    name: props.selectedColumn.name,
+                    value: e.value,
+                    description: e.value.toString(),
+                  },
+                };
+              });
             }}
           />
         </div>
