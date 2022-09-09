@@ -7,22 +7,25 @@ import "devextreme/dist/css/dx.light.css";
 import returnControlType from "./controlTypes";
 
 export default function Rule(props) {
-  const [inputValue, setInputValue] = useState({
-    type: null,
-    value: {},
-  });
-  const [selectedColumn, setSelectedColumn] = useState(null);
-  const [selectedOperator, setSelectedOperator] = useState(null);
-  const [filterValue, setFilterValue] = useState(null);
-  const [filterType, setFilterType] = useState()
+
+  let receivedColumn;
+  let receivedOperator
+  let receivedFilterValue;
+  if(props.item.value){
+    receivedColumn = props.filterColumns.find(x => x.columnId === props.item.value.columnId)
+    receivedOperator = filterOperators.find(x => x.id === props.item.value.operator)
+    receivedFilterValue = props.item.value.value
+  } 
+  
+  const [selectedColumn, setSelectedColumn] = useState(receivedColumn);
+  const [selectedOperator, setSelectedOperator] = useState(receivedOperator);
+  const [filterValue, setFilterValue] = useState(receivedFilterValue);
 
   function handleDelete() {
     props.updateItem(null);
   }
 
-  useEffect(() => {
-    props.updateItem(inputValue);
-  }, [filterValue, selectedOperator, inputValue]);
+  console.log(selectedOperator)
 
   return (
     <div style={{ display: "flex" }}>
@@ -32,24 +35,29 @@ export default function Rule(props) {
         placeholder={'Select a column...'}
         displayExpr={"name"}
         onValueChanged={(e) => {
-          console.log('Ive changed!')
-          setSelectedColumn(e.value);
-          setInputValue({  
-              type: returnControlType(e.value.filterInfo.controlType),
-              value: {}
-            })
+          if(props.item && e.value){
+            setSelectedColumn(e.value)
+            props.updateItem(
+              {
+                type: returnControlType(e.value.filterInfo.controlType),
+                value: props.item.value
+              }
+            )
+          }
         }}
         searchEnabled={true}
       />
       <FilterType
         selectedColumn={selectedColumn}
-        setInputValue={setInputValue}
-        inputValue={inputValue}
+        // setInputValue={setInputValue}
+        // inputValue={inputValue}
         setSelectedOperator={setSelectedOperator}
         filterOperators={filterOperators}
         selectedOperator={selectedOperator}
         filterValue={filterValue}
         setFilterValue={setFilterValue}
+        updateItem={props.updateItem}
+        item={props.item}
       />
       <button onClick={handleDelete}> Delete Rule </button>
     </div>

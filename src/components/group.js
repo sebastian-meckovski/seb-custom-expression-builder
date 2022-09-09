@@ -3,7 +3,7 @@ import CreateGuid from "./createGuid";
 import Rule from './rule'
 
 export default function Group({ item, updateItem, filterColumns }) {
-
+  
 
   function handleAddGroupClick() {
     let newItem = {
@@ -65,12 +65,12 @@ export default function Group({ item, updateItem, filterColumns }) {
   }
 
   function updateNestedItem(index) {
-    return (updatedItem) => {
+    // debugger
+    return function (updatedItem){
       if(item.values){
-
-
+        // debugger
         if(!updatedItem){
-          debugger
+          // debugger
           updateItem({
             ...item,
             values: [
@@ -79,6 +79,7 @@ export default function Group({ item, updateItem, filterColumns }) {
             ]
           })
         } else{
+          // debugger
             updateItem({
               ...item,
               values: [
@@ -162,6 +163,7 @@ export default function Group({ item, updateItem, filterColumns }) {
     
       {item.values ? item.values.map((x, i) => {
         if (x){
+          // debugger
         return x.type === 'group' ? <Group key={i} item={x} updateItem={updateNestedItem(i)} filterColumns={filterColumns}/> 
           : <Rule key={i} handleDelete={handleDelete} item={x} updateItem={updateNestedItem(i)} addNewRule={addNewRule} filterColumns={filterColumns}/>
         }

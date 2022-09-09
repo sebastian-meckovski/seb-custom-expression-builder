@@ -21,33 +21,29 @@ export default function FilterType(props) {
             value={props.selectedOperator}
             onValueChanged={(e) => {
               props.setSelectedOperator(e.value)
-                
-              props.setInputValue((prevState) => {
-                return {
-                  ...prevState,
+              props.updateItem(
+                {
+                  type: props.item.type,
                   value: {
-                    ...prevState.value,
-                    operator: e.value.id,
-                  },
-                };
-              });
+                    ...props.item.value,
+                    operator: e.value.id
+                  }
+                }
+              )
             }}
           />
           <NumberBox
+            value={props.filterValue}
             onValueChanged={(e) => {
               props.setFilterValue(e.value)
-              props.setInputValue((prevState) => {
-                return {
-                  ...prevState,
-                  value: {
-                    ...prevState.value,
-                    columnId: props.selectedColumn.columnId,
-                    name: props.selectedColumn.name,
-                    value: e.value,
-                    description: e.value.toString(),
-                  },
-                };
-              });
+              props.updateItem({
+                type: props.item.type,
+                value: {
+                  ...props.item.value,
+                  value: e.value ? e.value : null,
+                  description: e.value ? e.value.toString() : null
+                }
+              })
             }}
           />
         </div>
