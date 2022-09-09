@@ -7,16 +7,19 @@ import "devextreme/dist/css/dx.light.css";
 import returnControlType from "./controlTypes";
 
 export default function Rule(props) {
-
   let receivedColumn;
-  let receivedOperator
+  let receivedOperator;
   let receivedFilterValue;
-  if(props.item.value){
-    receivedColumn = props.filterColumns.find(x => x.columnId === props.item.value.columnId)
-    receivedOperator = filterOperators.find(x => x.id === props.item.value.operator)
-    receivedFilterValue = props.item.value.value
-  } 
-  
+  if (props.item.value) {
+    receivedColumn = props.filterColumns.find(
+      (x) => x.columnId === props.item.value.columnId
+    );
+    receivedOperator = filterOperators.find(
+      (x) => x.id === props.item.value.operator
+    );
+    receivedFilterValue = props.item.value.value;
+  }
+
   const [selectedColumn, setSelectedColumn] = useState(receivedColumn);
   const [selectedOperator, setSelectedOperator] = useState(receivedOperator);
   const [filterValue, setFilterValue] = useState(receivedFilterValue);
@@ -25,32 +28,26 @@ export default function Rule(props) {
     props.updateItem(null);
   }
 
-  console.log(selectedOperator)
-
   return (
     <div style={{ display: "flex" }}>
       <SelectBox
         items={props.filterColumns}
         value={selectedColumn}
-        placeholder={'Select a column...'}
+        placeholder={"Select a column..."}
         displayExpr={"name"}
         onValueChanged={(e) => {
-          if(props.item && e.value){
-            setSelectedColumn(e.value)
-            props.updateItem(
-              {
-                type: returnControlType(e.value.filterInfo.controlType),
-                value: props.item.value
-              }
-            )
+          if (props.item && e.value) {
+            setSelectedColumn(e.value);
+            props.updateItem({
+              type: returnControlType(e.value.filterInfo.controlType),
+              value: props.item.value,
+            });
           }
         }}
         searchEnabled={true}
       />
       <FilterType
         selectedColumn={selectedColumn}
-        // setInputValue={setInputValue}
-        // inputValue={inputValue}
         setSelectedOperator={setSelectedOperator}
         filterOperators={filterOperators}
         selectedOperator={selectedOperator}

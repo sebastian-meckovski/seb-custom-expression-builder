@@ -9,34 +9,44 @@ var builderStructureData = [
       {
         type: "IntValue",
         value: {
-          operator: 1,
+          value: 2341,
           columnId: "3a094b0a-09d2-4b62-941f-a32fb10b9e2e",
           name: "Episode of Care Id",
-          value: 123,
-          description: "123",
+          description: "2341",
+          operator: 16,
         },
       },
       {
-        type: "DateTimeValue",
-        value: {},
+        type: "LookupValue",
+        value: [],
       },
       {
         type: "IntValue",
         value: {
-          operator: 4,
+          value: 15,
           columnId: "ff8c5ee3-3e25-46cf-945d-5701cdc3f72e",
           name: "Age (At Date of Referral)",
-          value: 12345,
-          description: "12345",
+          description: "15",
+          operator: 4,
         },
       },
       {
-        type: "DateTimeValue",
-        value: {},
-      },
-      {
-        type: "DateTimeValue",
-        value: {},
+        type: "group",
+        value: {
+          operator: 1,
+          values: [
+            {
+              type: "IntValue",
+              value: {
+                value: 10,
+                columnId: "d9124cd7-292f-448d-8995-1e9527a99e58",
+                name: "Weeks (First Referred To Completed)",
+                description: "10",
+                operator: 8,
+              },
+            },
+          ],
+        },
       },
     ],
   },
@@ -48,32 +58,6 @@ var builderStructureData = [
 //     values: []
 //   },
 // ];
-// var builderStructureData = [
-//   {
-//     "operator": 1,
-//     "values": [
-//       {
-//         "type": "IntValue",
-//         "value": {
-//           "operator": 1,
-//           "columnId": "3a094b0a-09d2-4b62-941f-a32fb10b9e2e",
-//           "name": "Episode of Care Id",
-//           "value": 123,
-//           "description": "123"
-//         }
-//       },
-//       {
-//         "type": "IntValue",
-//         "value": {
-//           "operator": 4,
-//           "columnId": "ff8c5ee3-3e25-46cf-945d-5701cdc3f72e",
-//           "name": "Age (At Date of Referral)",
-//           "value": 12345,
-//           "description": "12345"
-//         }
-//       }
-//     ]
-//   }
-// ];
+
 
 export default builderStructureData;

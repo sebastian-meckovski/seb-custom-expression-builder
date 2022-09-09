@@ -9,7 +9,6 @@ export default function FilterType(props) {
     ? props.selectedColumn.filterInfo.controlType
     : null;
 
-
   switch (selectedColumnType) {
     case 1:
       return (
@@ -17,33 +16,33 @@ export default function FilterType(props) {
           <SelectBox
             items={props.filterOperators}
             displayExpr={"symbol"}
-            placeholder={'Select Operator...'}
+            placeholder={"Select Operator..."}
             value={props.selectedOperator}
             onValueChanged={(e) => {
-              props.setSelectedOperator(e.value)
-              props.updateItem(
-                {
-                  type: props.item.type,
-                  value: {
-                    ...props.item.value,
-                    operator: e.value.id
-                  }
-                }
-              )
+              props.setSelectedOperator(e.value);
+              props.updateItem({
+                type: props.item.type,
+                value: {
+                  ...props.item.value,
+                  operator: e.value.id,
+                },
+              });
             }}
           />
           <NumberBox
             value={props.filterValue}
             onValueChanged={(e) => {
-              props.setFilterValue(e.value)
+              props.setFilterValue(e.value);
               props.updateItem({
                 type: props.item.type,
                 value: {
-                  ...props.item.value,
                   value: e.value ? e.value : null,
-                  description: e.value ? e.value.toString() : null
-                }
-              })
+                  columnId: props.selectedColumn.columnId,
+                  name: props.selectedColumn.name,
+                  description: e.value ? e.value.toString() : null,
+                  ...props.item.value,
+                },
+              });
             }}
           />
         </div>

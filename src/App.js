@@ -10,7 +10,6 @@ let receivedColumns = IPReports[0].columns;
 function App() {
   const [builderStructure, setBuilderStructure] = useState(builderStructureData);
   let filterColumns = [];
-  // debugger
 
   receivedColumns.forEach((x) => {
     if (
@@ -23,11 +22,9 @@ function App() {
   });
 
   function updateItem(e) {
-    // debugger  
       setBuilderStructure([e])
   }
 
-  // debugger
   return (
     <div className="App">
           <div style={{ border: "1px dotted black" }}>
