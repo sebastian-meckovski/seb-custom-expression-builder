@@ -160,7 +160,8 @@ export default function Group({ item, updateItem, filterColumns }) {
 
       {item.values
         ? item.values.map((x, i) => {
-            if (x) {
+          // debugger
+          if (x) {
               let guid = CreateGuid()
               return x.type === "group" ? (
                 <Group
@@ -183,6 +184,7 @@ export default function Group({ item, updateItem, filterColumns }) {
           })
         : item.value.values.map((x, i) => {
             if (x) {
+              let guid = CreateGuid()
               return x.type === "group" ? (
                 <Group
                   key={i}
@@ -192,7 +194,7 @@ export default function Group({ item, updateItem, filterColumns }) {
                 />
               ) : (
                 <Rule
-                  key={i}
+                  key={guid}
                   item={x}
                   index={i}
                   updateItem={updateNestedItem(i)}

@@ -10,14 +10,22 @@ export default function Rule(props) {
   let receivedColumn;
   let receivedOperator;
   let receivedFilterValue;
-  if (props.item.value) {
-    receivedColumn = props.filterColumns.find(
-      (x) => x.columnId === props.item.value.columnId
-    );
+  
+
+  // this is where the issue is at:
+  if (props.item.value.columnId) {
+    receivedColumn = props.filterColumns.find(x => x.columnId === props.item.value.columnId);
+  } else {
+    receivedColumn = props.filterColumns[15]
+  }
+  // debugger
+  
+  if(props.item.value){
     receivedOperator = filterOperators.find(
       (x) => x.id === props.item.value.operator
     );
     receivedFilterValue = props.item.value.value;
+
   }
 
   const [selectedColumn, setSelectedColumn] = useState(receivedColumn);
@@ -28,6 +36,8 @@ export default function Rule(props) {
     props.updateItem(null);
   }
 
+
+
   return (
     <div style={{ display: "flex" }}>
       <SelectBox
@@ -35,14 +45,13 @@ export default function Rule(props) {
         value={selectedColumn}
         placeholder={"Select a column..."}
         displayExpr={"name"}
-        onValueChanged={(e) => {
-          if (props.item && e.value) {
-            setSelectedColumn(e.value);
-            props.updateItem({
-              type: returnControlType(e.value.filterInfo.controlType),
-              value: props.item.value,
-            });
-          }
+        onValueChange={(e) => {
+
+        setSelectedColumn(e);          
+          props.updateItem({
+            type: returnControlType(e.filterInfo.controlType),
+            value: props.item.value,
+          });
         }}
         searchEnabled={true}
       />
