@@ -10,16 +10,11 @@ export default function Rule(props) {
   let receivedColumn;
   let receivedOperator;
   let receivedFilterValue;
-  
 
-  // this is where the issue is at:
   if (props.item.value.columnId) {
     receivedColumn = props.filterColumns.find(x => x.columnId === props.item.value.columnId);
-  } else {
-    receivedColumn = props.filterColumns[15]
   }
-  // debugger
-  
+
   if(props.item.value){
     receivedOperator = filterOperators.find(
       (x) => x.id === props.item.value.operator
@@ -36,7 +31,15 @@ export default function Rule(props) {
     props.updateItem(null);
   }
 
-
+  function updateSelectedColumn(e){
+    props.updateItem({
+      type: returnControlType(e.filterInfo.controlType),
+      value: {
+        columnId: e.columnId,
+        name: e.name,
+      }
+    });
+  }
 
   return (
     <div style={{ display: "flex" }}>
@@ -47,11 +50,9 @@ export default function Rule(props) {
         displayExpr={"name"}
         onValueChange={(e) => {
 
-        setSelectedColumn(e);          
-          props.updateItem({
-            type: returnControlType(e.filterInfo.controlType),
-            value: props.item.value,
-          });
+          setSelectedColumn(e);
+          updateSelectedColumn(e)
+
         }}
         searchEnabled={true}
       />

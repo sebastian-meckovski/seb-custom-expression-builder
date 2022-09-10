@@ -55,9 +55,13 @@ var builderStructureData = [
 // var builderStructureData = [
 //   {
 //     operator: 1,
-//     values: []
+//     values: [
+//       {
+//         type: "IntValue",
+//         value: [],
+//       },
+//     ],
 //   },
 // ];
-
 
 export default builderStructureData;

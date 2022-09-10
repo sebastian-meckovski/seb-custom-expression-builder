@@ -143,6 +143,7 @@ export default function Group({ item, updateItem, filterColumns }) {
     }
   }
 
+
   return (
     <div className="group">
       <p onClick={changeOperator}>
@@ -160,7 +161,6 @@ export default function Group({ item, updateItem, filterColumns }) {
 
       {item.values
         ? item.values.map((x, i) => {
-          // debugger
           if (x) {
               let guid = CreateGuid()
               return x.type === "group" ? (
