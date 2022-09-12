@@ -3,8 +3,18 @@ var builderStructureData = [
     operator: 1,
     values: [
       {
+        type: "DateTimeValue",
+        value: {
+          columnId: "05b1087f-c51a-4dac-9e4d-afaf4c602974",
+          name: "Date of Birth",
+        },
+      },
+      {
         type: "LookupValue",
-        value: {},
+        value: {
+          columnId: "d0e396d6-94f2-479f-8c1a-701943472cc1",
+          name: "Ethnic Group",
+        },
       },
       {
         type: "IntValue",
@@ -18,7 +28,10 @@ var builderStructureData = [
       },
       {
         type: "LookupValue",
-        value: [],
+        value: {
+          columnId: "b88baf4d-7091-49f4-be0d-db9fcdd640ce",
+          name: "Language",
+        },
       },
       {
         type: "IntValue",
@@ -43,6 +56,13 @@ var builderStructureData = [
                 name: "Weeks (First Referred To Completed)",
                 description: "10",
                 operator: 8,
+              },
+            },
+            {
+              type: "LookupValue",
+              value: {
+                columnId: "038b1e11-cf9b-4683-a0a3-5e5a92c95d0b",
+                name: "Completion Reason (Episode of Care)",
               },
             },
           ],

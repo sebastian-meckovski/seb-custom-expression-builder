@@ -37,14 +37,14 @@ export default function Group({ item, updateItem, filterColumns }) {
     if (item.values) {
       updateItem({
         ...item,
-        values: [...item.values, x],
+        values: [x, ...item.values],
       });
     } else {
       updateItem({
         ...item,
         value: {
           ...item.value,
-          values: [...item.value.values, newRule],
+          values: [newRule, ...item.value.values],
         },
       });
     }
